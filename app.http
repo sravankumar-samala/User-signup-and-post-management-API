@@ -1,0 +1,35 @@
+### GET Request to Fetch All Users ###
+GET http://localhost:8008/api/users/
+###
+
+POST http://localhost:8008/api/signup
+Content-Type: application/json
+
+{
+    "name": "Narendra Modi",
+    "email" : "modi140@example.com"
+}
+###
+
+### Get all the posts ###
+Get http://localhost:8008/api/posts
+###
+
+POST http://localhost:8008/api/posts
+Content-Type: application/json
+
+{
+    "userId": "313d290b-5438-484e-87f4-23a40030b297",
+    "content": "This is very fun."
+}
+###
+
+DELETE http://localhost:8008/api/deletepost/a7afaec5-bcf6-4f26-92a4-772bd4f8d7b3
+Content-Type: application/json
+
+{
+    "loggedInUserId": "313d290b-5438-484e-87f4-23a40030b297"
+}
+###
+
+GET http://localhost:8008/API/posts/313d290b-5438-484e-87f4-23a40030b297
