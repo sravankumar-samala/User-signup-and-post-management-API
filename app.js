@@ -7,6 +7,7 @@ const { v4: uuid } = require('uuid');
 const app = express();
 app.use(express.json());
 const dbPath = path.join(__dirname, "padhakku.db");
+const port = process.env.PORT || 8008;
 let db;
 
 (async () => {
@@ -16,7 +17,7 @@ let db;
             driver: sqlite3.Database,
         });
 
-        app.listen(8008, () => {
+        app.listen(port, () => {
             console.log("Server started at port: 8008");
         });
     } catch (error) {
