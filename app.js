@@ -3,9 +3,11 @@ const sqlite3 = require("sqlite3");
 const path = require("path");
 const { open } = require("sqlite");
 const { v4: uuid } = require('uuid');
+const cors = require('cors')
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 const dbPath = path.join(__dirname, "padhakku.db");
 const port = process.env.PORT || 8008;
 let db;
@@ -41,6 +43,7 @@ app.get('/api/users', async (request, response) => {
         const dbResp = await db.all(getAllUsersQuery)
         if (dbResp.length === 0) return response.status(400).send('No users found.')
         response.status(200).send(dbResp)
+        response.setHeader("Access-Control-Allow-Credentials", true);
     } catch (error) {
         console.error('Error fetching users:', error);
         response.status(500).send('Internal server error.');
