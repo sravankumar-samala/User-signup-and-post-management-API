@@ -8,9 +8,16 @@ const cors = require('cors')
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    next();
+});
+
 const dbPath = path.join(__dirname, "padhakku.db");
 const port = process.env.PORT || 8008;
 let db;
+
 
 (async () => {
     try {
@@ -43,7 +50,6 @@ app.get('/api/users', async (request, response) => {
         const dbResp = await db.all(getAllUsersQuery)
         if (dbResp.length === 0) return response.status(400).send('No users found.')
         response.status(200).send(dbResp)
-        response.setHeader("Access-Control-Allow-Credentials", true);
     } catch (error) {
         console.error('Error fetching users:', error);
         response.status(500).send('Internal server error.');
